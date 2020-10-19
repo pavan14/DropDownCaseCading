@@ -1,0 +1,114 @@
+﻿@model DropDownCaseCading.Models.CountryStateViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="container align-content-center">
+    <div class="form-inline row-cols-md-6">
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">FirstName</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">MiddleName</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">LastName</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">Birth Date</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">Mobile Number</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">Education</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">Email</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">Religion</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">Cast</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">SubCast</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-form-label col-form-label-sm" for="inputSmall">Relation</label>
+            <input class="form-control form-control-sm" type="text" id="inputSmall">
+        </div>
+
+        <div class="form-group">
+            <label for="Country">Country</label>
+            @if (ViewBag.CountryList != null)
+            {
+                @Html.DropDownListFor(model => model.CountryID, ViewBag.CountryList as SelectList, "--Select Country--", new { @class = "form-control" })
+            }
+
+        </div>
+
+        <div class="form-group">
+            <label for="State">State</label>
+            @Html.DropDownListFor(model => model.StateID, new SelectList(""), "--Select State--", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label for="City">City</label>
+            @Html.DropDownListFor(model => model.CityID, new SelectList(""), "--Select City--", new { @class = "form-control" })
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-inline row-cols-6" >
+        
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#CountryID").change(function () {
+            $.get("/Home/GetStateList", { CountryID: $("#CountryID").val() }, function (data) {
+                $("#StateID").empty;
+                $.each(data, function (index, row) {
+                    $("#StateID").append("<option value='" + row.StateID + "'>" + row.StateName + "</option>")
+                });
+            });
+        })
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#StateID").change(function () {
+            $.get("/Home/GetCityList", { StateID: $("#StateID").val() }, function (data) {
+                $.each(data, function (index, row) {
+                    $("#CityID").append("<option value='" + row.CityID + "'>" + row.CityName + "</option>")
+                });
+            });
+        })
+    });
+</script>

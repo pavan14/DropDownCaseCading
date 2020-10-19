@@ -1,0 +1,56 @@
+﻿@model DropDownCaseCading.Models.PersonalInfo
+
+@{
+                /**/
+
+                ViewBag.Title = "StoreOrEdit";
+}
+
+<h2>StoreOrEdit</h2>
+
+@using (Html.BeginForm("StoreOrEdit", "Person", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.PersonID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Department, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Department)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Semester, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Semester, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Age, new { @class = "control-label" })
+        @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Fees, new { @class = "control-label" })
+        <div class="input-group">
+            <span class="input-group-addon">
+                ₹
+            </span>
+            @Html.EditorFor(model => model.Fees, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <input type="submit" value="Submit" class="btn btn-success" />
+        <input type="reset" value="Reset" class="btn btn-warning" />
+    </div>
+}  
